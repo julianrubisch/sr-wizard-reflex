@@ -8,6 +8,7 @@ require "rails/commands/server/server_command"
 require "cable_ready"
 require "stimulus_reflex"
 require_relative "./book"
+require_relative "./restaurant"
 
 module ApplicationCable; end
 
@@ -42,11 +43,13 @@ class WizardReflex < ApplicationReflex
   private
 
   RESOURCE_ALLOWLIST = {
-    "books#new" => "Book"
+    "books#new" => "Book",
+    "restaurants#new" => "Restaurant"
   }.freeze
 
   RESOURCE_PARAMS_ALLOWLIST = {
-    "books#new" => "book"
+    "books#new" => "book",
+    "restaurants#new" => "restaurant"
   }.freeze
 
   def resource_name
@@ -65,8 +68,10 @@ class WizardReflex < ApplicationReflex
 end
 
 class BookWizardReflex < WizardReflex; end
+class RestaurantWizardReflex < WizardReflex; end
 
 require_relative "./books_controller"
+require_relative "./restaurants_controller"
 
 class MiniApp < Rails::Application
   require "stimulus_reflex/../../app/channels/stimulus_reflex/channel"
@@ -87,6 +92,7 @@ class MiniApp < Rails::Application
     mount ActionCable.server => "/cable"
     get '___glitch_loading_status___', to: redirect('/')
     resources :books, only: :new
+    resources :restaurants, only: :new
     root "books#new"
   end
 end

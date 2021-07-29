@@ -1,5 +1,4 @@
 class Book < ActiveRecord::Base
-  def self.all
-    [Book.new(title: "Recursion", author: "Blake Crouch"), Book.new(title: "VALIS", author: "Philip K. Dick")]    
-  end
+  validates :author, presence: true, on: :step_1
+  validates :title, presence: true, on: :step_2
 end
