@@ -13,6 +13,19 @@ class BooksController < ApplicationController
           <%= javascript_include_tag "/index.js", type: "module" %>
         </head>
         <body>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">                            
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                  <a class="nav-link active" href="/books/new">New Book</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/restaurants/new">New Restaurant</a>
+                </li>
+              </ul>              
+            </div>
+          </nav>
+          
           <div class="container my-5">
             <h1>Book Wizard</h1>
             
